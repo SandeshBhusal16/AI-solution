@@ -4,9 +4,12 @@ const app = express();
 const routes = require("./Routes");
 const cors = require("cors");
 const path = require("path");
+const dotenv = require("dotenv");
+dotenv.config();
+// const allowedOrigins = "https://ai-solution-gamma.vercel.app";
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process,
   })
 );
 app.use(
