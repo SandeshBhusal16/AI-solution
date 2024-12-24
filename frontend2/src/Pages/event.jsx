@@ -19,7 +19,10 @@ const Event = () => {
       console.log(error);
     }
   };
+
   console.log("hello", allevent);
+
+  const currentDate = new Date().setHours(0, 0, 0, 0);
 
   return (
     <div>
@@ -86,32 +89,92 @@ const Event = () => {
             )}
           </button>
         </div>
+        <div className="bg-blue-50 min-h-[50vh]">
+          {active === "today" && (
+            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5 grid grid-cols-3 justify-center">
+              {allevent
+                ?.filter(
+                  (events) =>
+                    new Date(events.startdate).setHours(0, 0, 0, 0) <=
+                      currentDate &&
+                    new Date(events.enddate).setHours(0, 0, 0, 0) >= currentDate
+                )
+                .map((allevent) => (
+                  <Card
+                    event
+                    classname={"bg-[white] w-[340px]"}
+                    imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
+                    src={allevent.image}
+                    title={"hello"}
+                    startDate={moment(allevent.startdate).format(
+                      "MMMM Do YYYY"
+                    )}
+                    endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
+                    location={allevent.location}
+                  />
+                  // </motion.div>
+                ))}
+              {allevent?.filter(
+                (event) =>
+                  new Date(event.startdate).setHours(0, 0, 0, 0) <=
+                    currentDate &&
+                  new Date(event.enddate).setHours(0, 0, 0, 0) >= currentDate
+              ).length === 0 && (
+                <>
+                  <div></div>
+                  <div className="h-[50vh] w-[200px] text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
+                    No events for today.
+                  </div>
+                </>
+              )}
+            </div>
+          )}
 
-        {active === "today" && (
-          <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5 grid grid-cols-3 justify-center">
-            {allevent
-              ?.filter((events) => events.status === "todayEvent")
-              .map((allevent) => (
-                <Card
-                  event
-                  classname={"bg-[white] w-[340px]"}
-                  imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
-                  src={allevent.image}
-                  title={"hello"}
-                  startDate={moment(allevent.startdate).format("MMMM Do YYYY")}
-                  endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
-                  location={allevent.location}
-                />
-                // </motion.div>
-              ))}
-          </div>
-        )}
+          {active === "past" && (
+            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
+              {allevent
+                ?.filter(
+                  (events) =>
+                    new Date(events.enddate).setHours(0, 0, 0, 0) < currentDate
+                )
+                .map((allevent) => (
+                  // <motion.div
+                  //   className={""}
+                  //   initial={{ y: -50 }}
+                  //   animate={{ y: 0 }}
+                  //   transition={{ type: "spring", stiffness: 100 }}
+                  // >
+                  <Card
+                    event
+                    classname={"bg-[white] w-[340px]"}
+                    imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
+                    src={allevent.image}
+                    title={"hello"}
+                    startDate={moment(allevent.startdate).format(
+                      "MMMM Do YYYY"
+                    )}
+                    endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
+                    location={allevent.location}
+                  />
+                  // </motion.div>
+                ))}
+              {allevent?.filter(
+                (events) =>
+                  new Date(events.enddate).setHours(0, 0, 0, 0) < currentDate
+              ).length === 0 && (
+                <>
+                  <div></div>
+                  <div className="h-[50vh] w-[200px] text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
+                    No Past Events
+                  </div>
+                </>
+              )}
+            </div>
+          )}
 
-        {active === "past" && (
-          <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
-            {allevent
-              ?.filter((events) => events.status === "pastEvent")
-              .map((allevent) => (
+          {active === "all" && (
+            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
+              {allevent?.map((allevent) => (
                 // <motion.div
                 //   className={""}
                 //   initial={{ y: -50 }}
@@ -130,51 +193,45 @@ const Event = () => {
                 />
                 // </motion.div>
               ))}
-          </div>
-        )}
+            </div>
+          )}
 
-        {active === "all" && (
-          <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
-            {allevent?.map((allevent) => (
-              // <motion.div
-              //   className={""}
-              //   initial={{ y: -50 }}
-              //   animate={{ y: 0 }}
-              //   transition={{ type: "spring", stiffness: 100 }}
-              // >
-              <Card
-                event
-                classname={"bg-[white] w-[340px]"}
-                imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
-                src={allevent.image}
-                title={"hello"}
-                startDate={moment(allevent.startdate).format("MMMM Do YYYY")}
-                endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
-                location={allevent.location}
-              />
-              // </motion.div>
-            ))}
-          </div>
-        )}
-
-        {active === "Upcoming" && (
-          <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
-            {allevent
-              ?.filter((events) => events.status === "UpcomingEvent")
-              .map((allevent) => (
-                <Card
-                  event
-                  classname={"bg-[white] w-[340px]"}
-                  imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
-                  src={allevent.image}
-                  title={"hello"}
-                  startDate={moment(allevent.startdate).format("MMMM Do YYYY")}
-                  endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
-                  location={allevent.location}
-                />
-              ))}
-          </div>
-        )}
+          {active === "Upcoming" && (
+            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
+              {allevent
+                ?.filter(
+                  (events) =>
+                    new Date(events.startdate).setHours(0, 0, 0, 0) >
+                    currentDate
+                )
+                .map((allevent) => (
+                  <Card
+                    event
+                    classname={"bg-[white] w-[340px]"}
+                    imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
+                    src={allevent.image}
+                    title={"hello"}
+                    startDate={moment(allevent.startdate).format(
+                      "MMMM Do YYYY"
+                    )}
+                    endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
+                    location={allevent.location}
+                  />
+                ))}
+              {allevent?.filter(
+                (event) =>
+                  new Date(event.startdate).setHours(0, 0, 0, 0) > currentDate
+              ).length === 0 && (
+                <>
+                  <div></div>
+                  <div className="h-[50vh] w-[200px] text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
+                    No Upcomming Events
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
