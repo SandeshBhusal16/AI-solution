@@ -152,7 +152,11 @@ function Dashboard() {
           height={300}
         />
         <div className="h-[300px]">
-          <Doughnut data={finalData} options={options} />
+          <Doughnut
+            className="doughnut-chart"
+            data={finalData}
+            options={options}
+          />
         </div>
       </section>
 
