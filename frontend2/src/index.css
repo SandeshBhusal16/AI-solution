@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rcb-toggle-button {
+  width: 50px !important;
+  height: 48px !important;
+}
+
+.rcb-chat-tooltip.rcb-tooltip-show {
+  display: none;
+}
+
+.rcb-toggle-icon {
+  width: 50px !important;
+  height: 48px !important;
+}
+
+.rcb-badge {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 12px;
+}
