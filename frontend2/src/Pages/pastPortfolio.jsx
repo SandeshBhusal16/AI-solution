@@ -40,7 +40,7 @@ const PastPortfolio = () => {
           </p>
         </motion.div>
 
-        <div className="gap-10 px-[200px] py-5 grid grid-cols-3 justify-center bg-blue-50 ">
+        <div className="gap-10 px-[200px] py-5 grid grid-cols-3 h-[50vh] justify-center bg-blue-50 ">
           {allPortfolio?.map((portfolio) => (
             // <motion.div
             //   className={""}

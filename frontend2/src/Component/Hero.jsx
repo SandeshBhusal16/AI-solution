@@ -31,14 +31,17 @@ const Hero = () => {
   }, [typing, currentIndex]);
 
   return (
-    <div
-      className="text-white flex justify-between items-center rounded-lg "
-      style={{
-        // boxShadow: "0 0 14px #bfd2f6",
-        backgroundImage: `url(${background})`,
-      }}
-    >
-      <div className="max-w-[1200px] mx-5 h-screen flex flex-col justify-center  px-4">
+    <>
+      <div
+        className=" flex justify-between h-screen relative items-center "
+        style={{
+          // boxShadow: "0 0 14px #bfd2f6",
+          backgroundImage: `url(${background})`,
+        }}
+      >
+        <div className="h-screen w-full bg-black opacity-[0.5]"></div>
+      </div>
+      <div className=" h-screen text-white  absolute flex flex-col justify-center px-20">
         <p className=" font-bold text-xl md:text-2xl mb-4">
           Empowering Workplaces with AI-Driven Solutions
         </p>
@@ -63,9 +66,7 @@ const Hero = () => {
           Get Started
         </button> */}
       </div>
-
-      <div></div>
-    </div>
+    </>
   );
 };
 
