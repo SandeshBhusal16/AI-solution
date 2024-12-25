@@ -33,13 +33,15 @@ const Event = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          <div className="mb-4">
-            <h1 className="text-4xl text-[#4f46e5] font-bold mb-1">Events</h1>
-            <div className="h-1 bg-[#4f46e5] w-[50px]"></div>
+          <div className="mb-4 flex flex-col gap-4 items-center py-4 bg-blue-50">
+            <div>
+              <h1 className="text-4xl text-[#4f46e5] font-bold mb-1">Events</h1>
+              <div className="h-1 bg-[#4f46e5] w-[50px]"></div>
+            </div>
+            <p className="text-lg text-gray-400 max-w-[700px] ">
+              Events Managed By AI Solution
+            </p>
           </div>
-          <p className="text-lg text-gray-400 max-w-[700px] ">
-            Events Managed By AI Solution
-          </p>
         </motion.div>
 
         <div className="flex gap-24 justify-center mb-5">
