@@ -35,10 +35,13 @@ const ServicesCard = ({
       )}
       {service && (
         <div
-          className={`w-[300px]  flex flex-col gap-1 bg-slate-300 p-4 rounded-md my-2 ${Containercss}`}
+          className={`w-[400px]  flex flex-col gap-1 bg-[#fbfbfb] p-4 rounded-md my-2 ${Containercss}`}
         >
           <div className="flex justify-center">
-            <img className={`w-[50px] h-[50px] ${imgCss}`} src={imgsrc} />
+            <img
+              className={`w-[50px] h-[50px] p-1 rounded-full  ${imgCss}`}
+              src={imgsrc}
+            />
           </div>
 
           <div className="flex gap-2 justify-center">

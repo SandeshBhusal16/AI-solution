@@ -29,18 +29,20 @@ const PastPortfolio = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          <div className="mb-4">
-            <h1 className="text-4xl text-[#4f46e5] font-bold mb-1">
-              Past-Portfolio
-            </h1>
-            <div className="h-1 bg-[#4f46e5] w-[90px]"></div>
+          <div className="mb-4 flex flex-col gap-4 items-center bg-blue-50 py-4">
+            <div>
+              <h1 className="text-4xl text-[#4f46e5] font-bold mb-1">
+                Past-Portfolio
+              </h1>
+              <div className="h-1 bg-[#4f46e5] w-[90px]"></div>
+            </div>
+            <p className="text-lg text-gray-400 max-w-[700px] ">
+              Past-Portfolio Managed By AI Solution
+            </p>
           </div>
-          <p className="text-lg text-gray-400 max-w-[700px] ">
-            Past-Portfolio Managed By AI Solution
-          </p>
         </motion.div>
 
-        <div className="gap-10 px-[200px] py-5 grid grid-cols-3 h-[50vh] justify-center bg-blue-50 ">
+        <div className="gap-10 px-[200px] py-5 grid grid-cols-3 min-h-[50vh] justify-center bg-blue-50 ">
           {allPortfolio?.map((portfolio) => (
             // <motion.div
             //   className={""}

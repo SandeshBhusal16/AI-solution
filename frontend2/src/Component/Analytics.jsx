@@ -5,6 +5,8 @@ import second from "../assets/homepage2.png";
 import Aiservice from "../assets/Aiservice.gif";
 import customAi from "../assets/customAi.gif";
 import AffordableSolution from "../assets/AffordableSolution.gif";
+import service4 from "../assets/service4.gif";
+import service5 from "../assets/service5.gif";
 import client1 from "../assets/client1.png";
 import client2 from "../assets/client3.jpg";
 import client3 from "../assets/client2.png";
@@ -30,6 +32,18 @@ const Analytics = () => {
       title: "Custom AI Development",
       description:
         "Tailored AI solutions built to meet the unique needs of your industry, ensuring seamless integration and measurable outcomes.",
+    },
+    {
+      imgsrc: service4,
+      title: "Predictive Analytics",
+      description:
+        "Harness the power of AI to predict trends, optimize operations, and make data-driven decisions. Our predictive analytics tools enable businesses to stay ahead of the curve by providing actionable insights from data.",
+    },
+    {
+      imgsrc: service5,
+      title: "Natural Language Processing (NLP) Solutions",
+      description:
+        "Enable machines to understand, interpret, and respond to human language with our NLP solutions. From chatbots to sentiment analysis, our tools are built to bridge the gap between humans and technology seamlessly.",
     },
   ];
 
@@ -59,10 +73,10 @@ const Analytics = () => {
   return (
     <>
       <div>
-        <div className="flex justify-center text-2xl font-bold">
+        <div className="flex justify-center mb-5 text-2xl text-blue-600 font-bold">
           Our AI Solutions Services
         </div>
-        <div className="flex gap-4 justify-center m-auto w-full">
+        <div className="flex gap-4 flex-wrap justify-center m-auto w-full">
           {servicesData.map((item, index) => (
             <ServicesCard
               Containercss={"bg-[#fff] shadow-md"}

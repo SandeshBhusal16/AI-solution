@@ -32,9 +32,22 @@ const Card = ({
             />
           </div>
           <div className="p-4">
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-[1px]">
               {Array.from({ length: rating }, (_, index) => (
-                <span key={index}>⭐</span>
+                <span key={index}>
+                  <svg
+                    width="12"
+                    height="11"
+                    viewBox="0 0 12 11"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 4.20143L7.74278 3.76805L6 0L4.25722 3.76805L0 4.20143L3.17984 6.96404L2.2921 11L6 8.93868L9.7079 11L8.82016 6.96404L12 4.20143Z"
+                      fill="#F89336"
+                    />
+                  </svg>
+                </span>
               ))}
             </div>
 
