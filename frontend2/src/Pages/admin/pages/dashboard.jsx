@@ -95,7 +95,7 @@ function Dashboard() {
               Total number of Portfolio
             </div>
             <div className="font-bold pl-2 text-4xl">
-              {AllData?.contactusData?.length}
+              {AllData?.allPortfolio?.length}
             </div>
           </div>
           <div>
@@ -107,7 +107,7 @@ function Dashboard() {
           <div>
             <div className="font-semibold text-md">Total number of Inquiry</div>
             <div className="font-bold pl-2 text-4xl">
-              {AllData?.allPortfolio?.length}
+              {AllData?.contactusData?.length}
             </div>
           </div>
           <div>

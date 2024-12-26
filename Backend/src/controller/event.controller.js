@@ -8,6 +8,10 @@ class EventController {
       let data = req.body;
       if (req.file) {
         data.image = `http://localhost:3005/public/upload/${req.file.filename}`; // Handle optional image upload
+      } else {
+        next({
+          msg: "Image not uploded",
+        });
       }
 
       const startDate = new Date(data.startdate).setHours(0, 0, 0, 0);

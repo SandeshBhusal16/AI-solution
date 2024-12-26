@@ -18,6 +18,10 @@ const ServicesCard = ({
       {testimonial && (
         <div
           className={`w-[300px]  flex flex-col gap-1 bg-slate-300 p-4  pt-0 rounded-md my-2 ${Containercss}`}
+          style={{
+            boxShadow:
+              "0px 0px 4px rgba(226, 232, 240, 0.75), 0px 4px 12px #E2E8F0;",
+          }}
         >
           <div className="flex relative justify-center  w-full h-[50px]">
             <img
@@ -36,6 +40,10 @@ const ServicesCard = ({
       {service && (
         <div
           className={`w-[400px]  flex flex-col gap-1 bg-[#fbfbfb] p-4 rounded-md my-2 ${Containercss}`}
+          style={{
+            boxShadow:
+              "0px 0px 4px rgba(226, 232, 240, 0.75), 0px 4px 12px #E2E8F0;",
+          }}
         >
           <div className="flex justify-center">
             <img

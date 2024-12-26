@@ -42,12 +42,26 @@ const PastPortfolioManagement = () => {
     title: yup.string().required("Title is required"),
     description: yup.string().required("Description is required"),
     image: yup.string().required("Image URL is required"),
-    rating: yup.number().required("Rating is required").min(1).max(5),
+    rating: yup
+      .number()
+      .required("Rating is required")
+      .min(1)
+      .max(5),
   });
+
+  const validateField = async (name, value) => {
+    try {
+      await validationSchema.validateAt(name, { [name]: value });
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: undefined }));
+    } catch (error) {
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: error.message }));
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    validateField(name, value);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,7 +129,24 @@ const PastPortfolioManagement = () => {
         });
       }
       setErrors(newErrors);
-      console.error("Error submitting portfolio:", validationError);
+      console.error(
+        "Error submitting portfolio:",
+        validationError.response.data.msg === "Image not uploded"
+      );
+
+      if (validationError.response.data.msg === "Image not uploded") {
+        toast.error("Image is Required", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     }
   };
 

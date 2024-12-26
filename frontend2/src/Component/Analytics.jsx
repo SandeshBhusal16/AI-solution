@@ -94,15 +94,17 @@ const Analytics = () => {
       </div>
 
       <div
-        className="w-full bg-white pb-16 px-4 rounded-lg "
+        className="w-full pb-16 px-4 text-white border-y "
         style={{
-          boxShadow: "0 0 14px #bfd2f6",
+          background: "#4f46e5",
+          boxShadow:
+            "0px 0px 4px rgba(226, 232, 240, 0.75), 0px 4px 12px #E2E8F0;",
         }}
       >
         <div className="flex py-10 justify-center text-2xl font-bold">
           How We Drive Success
         </div>
-        <div className="max-w-[1240px] justify-center mx-auto md:grid-cols-2 flex gap-8 mb-10 mr-10">
+        <div className="max-w-[1240px] justify-center mx-auto md:grid-cols-2 flex gap-8 mb-12 mr-10">
           <div className="flex flex-col w-1/2">
             <div className="md:text-3xl text-start flex sm:text-3xl font-bold py-2">
               Enhanced Digital Employee Experience
@@ -136,6 +138,24 @@ const Analytics = () => {
               allowing quicker decision-making and innovation.
             </p>
           </div>
+        </div>
+
+        <div className="max-w-[1240px] justify-center mx-auto md:grid-cols-2 flex gap-8 my-12 mr-10">
+          <div className="flex flex-col w-1/2">
+            <div className="md:text-3xl text-start flex sm:text-3xl font-bold py-2">
+              Enhanced Digital Employee Experience
+            </div>
+            <p className="">
+              Our AI solutions proactively identify and resolve digital
+              bottlenecks, creating a smoother work experience for your team.
+            </p>
+          </div>
+
+          <img
+            className="bg-transparent rounded-lg w-[300px]"
+            src={first}
+            alt=""
+          />
         </div>
       </div>
       <div className="flex justify-center mb-7 text-2xl font-bold">
