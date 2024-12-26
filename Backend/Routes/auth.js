@@ -7,6 +7,7 @@ const AuthRoutes = require("express").Router();
 AuthRoutes.post("/login", authctrl.login);
 AuthRoutes.post("/register", authctrl.register);
 AuthRoutes.get("/me", AuthCheck);
+AuthRoutes.put("/updatepass/:id", authctrl.changePassword);
 // AuthRoutes.post ("/contact", contactCtrl.contact);
 
 module.exports = AuthRoutes;
