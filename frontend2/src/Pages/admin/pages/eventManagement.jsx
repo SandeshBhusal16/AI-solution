@@ -81,6 +81,22 @@ const EventManagement = () => {
     // setSelectedId(null);
     // setErrors({});
   };
+
+  const validateField = async (name, value) => {
+    try {
+      await ValidationSchema.validateAt(name, { [name]: value });
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: undefined }));
+    } catch (error) {
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: error.message }));
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...eventData, [name]: value });
+    validateField(name, value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -141,7 +157,7 @@ const EventManagement = () => {
       fetchEvent();
       closeDrawer(true);
     } catch (ValidationError) {
-      console.log(ValidationError);
+      console.log("error on events", ValidationError);
       const newErrors = {};
       if (ValidationError.inner) {
         ValidationError.inner.forEach((err) => {
@@ -149,6 +165,19 @@ const EventManagement = () => {
         });
       }
       setErrors(newErrors);
+      if (ValidationError.response.data.msg === "Image not uploded") {
+        toast.error("Image is Required", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     }
   };
   const handledelete = async () => {
@@ -186,8 +215,6 @@ const EventManagement = () => {
   // console.log("id", isSelected);
 
   const Enddate = moment(alleventdata.enddate).format("MMMM Do YYYY");
-
-  console.log(eventData);
 
   return (
     <>
@@ -375,9 +402,10 @@ const EventManagement = () => {
                 name="title"
                 placeholder="Title"
                 value={eventData.name}
-                onChange={(e) =>
-                  setEventData({ ...eventData, name: e.target.value })
-                }
+                onChange={(e) => {
+                  setEventData({ ...eventData, name: e.target.value });
+                  validateField("name", e.target.value);
+                }}
                 className="border w-full p-2 rounded-lg font-[400]"
               />
               {errors.name && (
@@ -395,9 +423,10 @@ const EventManagement = () => {
                 className="border p-2 rounded-lg font-[400]"
                 type="date"
                 value={eventData.startdate}
-                onChange={(e) =>
-                  setEventData({ ...eventData, startdate: e.target.value })
-                }
+                onChange={(e) => {
+                  setEventData({ ...eventData, startdate: e.target.value });
+                  validateField("startdate", e.target.value);
+                }}
               />
               {errors.startdate && (
                 <div className="text-red-500 text-xs font-[400] ">
@@ -414,9 +443,10 @@ const EventManagement = () => {
                 className="border p-2 rounded-lg font-[400]"
                 type="date"
                 value={eventData.enddate}
-                onChange={(e) =>
-                  setEventData({ ...eventData, enddate: e.target.value })
-                }
+                onChange={(e) => {
+                  setEventData({ ...eventData, enddate: e.target.value });
+                  validateField("enddate", e.target.value);
+                }}
               />
               {errors.enddate && (
                 <div className="text-red-500 text-xs font-[400] ">
@@ -435,9 +465,10 @@ const EventManagement = () => {
                 accept="image/*"
                 className="border p-2 rounded-lg font-[400]"
                 // value={eventData.image}
-                onChange={(e) =>
-                  setEventData({ ...eventData, image: e.target.files[0] })
-                }
+                onChange={(e) => {
+                  setEventData({ ...eventData, image: e.target.files[0] });
+                  validateField("image", e.target.files[0]);
+                }}
               />
               {errors.image && (
                 <div className="text-red-500 text-xs font-[400] ">
@@ -455,9 +486,10 @@ const EventManagement = () => {
                 className="border p-2 rounded-lg font-[400]"
                 placeholder="Location"
                 value={eventData.location}
-                onChange={(e) =>
-                  setEventData({ ...eventData, location: e.target.value })
-                }
+                onChange={(e) => {
+                  setEventData({ ...eventData, location: e.target.value });
+                  validateField("location", e.target.value);
+                }}
               />
               {errors.location && (
                 <div className="text-red-500 text-xs font-[400] ">

@@ -4,22 +4,57 @@ import { useNavigate } from "react-router-dom";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
+import * as yup from "yup";
 
 const ContactUs = () => {
   const navigation = useNavigate();
   const [contactUs, setContactus] = useState({
     name: "",
     email: "",
-    phone: Number,
+    phone: "",
     companyName: "",
     country: "",
     jobTitle: "",
     jobDetails: "",
   });
 
+  const [errors, setErrors] = useState({});
+
+  const schema = yup.object().shape({
+    name: yup.string().required("Name is required"),
+    email: yup
+      .string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    phone: yup
+      .string()
+      .matches(/^\d+$/, "Phone number must be numeric")
+      .required("Phone number is required"),
+    companyName: yup.string().required("Company name is required"),
+    country: yup.string().required("Country is required"),
+    jobTitle: yup.string().required("Job title is required"),
+    jobDetails: yup.string().required("Job details are required"),
+  });
+
+  const validateField = async (field, value) => {
+    try {
+      await schema.validateAt(field, { [field]: value });
+      setErrors((prevErrors) => ({ ...prevErrors, [field]: "" }));
+    } catch (err) {
+      setErrors((prevErrors) => ({ ...prevErrors, [field]: err.message }));
+    }
+  };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setContactus((prev) => ({ ...prev, [id]: value }));
+    validateField(id, value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      await schema.validate(contactUs, { abortEarly: false });
       let response = await axios.post(
         "http://localhost:3005/contact/create",
         contactUs
@@ -38,20 +73,31 @@ const ContactUs = () => {
       clearallData();
       console.log("hello", response);
     } catch (error) {
-      console.log(error);
+      if (error.inner) {
+        const validationErrors = {};
+        error.inner.forEach((err) => {
+          validationErrors[err.path] = err.message;
+        });
+        setErrors(validationErrors);
+      } else {
+        console.log(error);
+      }
     }
   };
+
   const clearallData = () => {
     setContactus({
       name: "",
       email: "",
-      phone: Number,
+      phone: "",
       companyName: "",
       country: "",
       jobTitle: "",
       jobDetails: "",
     });
+    setErrors({});
   };
+
   return (
     <>
       <motion.div
@@ -71,129 +117,27 @@ const ContactUs = () => {
       <div className="flex items-center justify-center p-12 text-white">
         <div className="mx-auto w-full max-w-[550px] bg-[white] shadow-lg p-5 rounded-lg">
           <form onSubmit={handleSubmit}>
-            <div className="mb-5">
-              <label className="mb-3 block text-base font-medium text-[#6963d2]">
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                value={contactUs.name}
-                onChange={(e) =>
-                  setContactus({ ...contactUs, name: e.target.value })
-                }
-                placeholder="Full Name"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="email"
-                className="mb-3 block text-base font-medium text-[#6963d2]"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={contactUs.email}
-                onChange={(e) =>
-                  setContactus({ ...contactUs, email: e.target.value })
-                }
-                placeholder="example@domain.com"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="subject"
-                className="mb-3 block text-base font-medium text-[#6963d2]"
-              >
-                Phone number
-              </label>
-              <input
-                type="text"
-                id="Phone number"
-                value={contactUs.phone}
-                onChange={(e) =>
-                  setContactus({ ...contactUs, phone: e.target.value })
-                }
-                placeholder="Enter your Phone number"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="Company Name"
-                className="mb-3 block text-base font-medium text-[#6963d2]"
-              >
-                Company Name
-              </label>
-              <input
-                type="text"
-                id="Company Name"
-                value={contactUs.companyName}
-                onChange={(e) =>
-                  setContactus({ ...contactUs, companyName: e.target.value })
-                }
-                placeholder="Enter your Company Name"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>{" "}
-            <div className="mb-5">
-              <label
-                htmlFor="Country"
-                className="mb-3 block text-base font-medium text-[#6963d2]"
-              >
-                Country
-              </label>
-              <input
-                type="text"
-                id="Country"
-                value={contactUs.country}
-                onChange={(e) =>
-                  setContactus({ ...contactUs, country: e.target.value })
-                }
-                placeholder="Enter your Country"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="subject"
-                className="mb-3 block text-base font-medium text-[#6963d2]"
-              >
-                Job Title
-              </label>
-              <input
-                type="text"
-                id="Jobtitle"
-                value={contactUs.jobTitle}
-                onChange={(e) =>
-                  setContactus({ ...contactUs, jobTitle: e.target.value })
-                }
-                placeholder="Enter your Jobtitle"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
-            <div className="mb-5">
-              <label
-                htmlFor="subject"
-                className="mb-3 block text-base font-medium text-[#6963d2]"
-              >
-                Job Details
-              </label>
-              <input
-                type="text"
-                id="Jobdetails"
-                value={contactUs.jobDetails}
-                onChange={(e) =>
-                  setContactus({ ...contactUs, jobDetails: e.target.value })
-                }
-                placeholder="Enter your Job Details"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
+            {Object.keys(contactUs).map((field) => (
+              <div className="mb-5" key={field}>
+                <label
+                  htmlFor={field}
+                  className="mb-3 block text-base font-medium text-[#6963d2]"
+                >
+                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                </label>
+                <input
+                  type="text"
+                  id={field}
+                  value={contactUs[field]}
+                  onChange={handleChange}
+                  placeholder={`Enter your ${field}`}
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                />
+                {errors[field] && (
+                  <p className="text-red-500 text-sm mt-1">{errors[field]}</p>
+                )}
+              </div>
+            ))}
             <div>
               <button className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
                 Submit
