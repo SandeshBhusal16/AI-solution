@@ -10,8 +10,13 @@ const App = () => {
   return (
     <div>
       {/* {!excludeNavFooterRoutes.includes(Location.pathname) && <Navbar />} */}
-      <AppRoutes />
+      {/* <AppRoutes /> */}
       {/* {!excludeNavFooterRoutes.includes(Location.pathname) && <Footer />} */}
+      <div className="h-screen flex justify-center items-center text-4xl font-[600] text-[#4f46e5]">
+        {"<Sorry>"} <br />
+        &nbsp; &nbsp;&nbsp;&nbsp; Website is Under Construction <br />
+        {"</Sorry>"}
+      </div>
 
       {/* <Home/>  */}
     </div>

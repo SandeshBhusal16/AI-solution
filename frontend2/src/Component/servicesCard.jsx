@@ -46,10 +46,7 @@ const ServicesCard = ({
           }}
         >
           <div className="flex justify-center">
-            <img
-              className={`w-[50px] h-[50px] p-1 rounded-full  ${imgCss}`}
-              src={imgsrc}
-            />
+            <img className={`w-[50px] h-[50px] ${imgCss}`} src={imgsrc} />
           </div>
 
           <div className="flex gap-2 justify-center">
