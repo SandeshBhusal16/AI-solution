@@ -147,27 +147,32 @@ const ContactUsManagement = () => {
       </div>
 
       {isOpen && (
-        <div className="fixed top-[50%] bg-[white] shadow-md rounded-md right-[40%]">
-          <div className="flex flex-col  justify-center gap-2 px-5 py-7">
-            <div className="flex justify-center">
-              Are you sure Do you want to delete this ?
-            </div>
-            <div className="flex justify-center gap-2 items-center">
-              <button
-                onClick={() => setIsOpen(false)}
-                className="border px-8 py-1 rounded-md"
-              >
-                No
-              </button>
-              <button
-                onClick={() => handleDelete()}
-                className="border px-8 py-1 rounded-md bg-[blue] text-white"
-              >
-                Yes
-              </button>
+        <>
+          <div className="w-full  absolute top-0 left-0 h-screen bg-black z-10 opacity-50">
+            {" "}
+          </div>
+          <div className="fixed top-[50%] bg-[white] shadow-md rounded-md right-[40%] z-10">
+            <div className="flex flex-col  justify-center gap-2 px-5 py-7">
+              <div className="flex justify-center">
+                Are you sure Do you want to delete this ?
+              </div>
+              <div className="flex justify-center gap-2 items-center">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="border px-8 py-1 rounded-md"
+                >
+                  No
+                </button>
+                <button
+                  onClick={() => handleDelete()}
+                  className="border px-8 py-1 rounded-md bg-[blue] text-white"
+                >
+                  Yes
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
 
       {Ismodal && (

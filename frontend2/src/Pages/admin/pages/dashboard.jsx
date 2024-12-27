@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import event from "../../../assets/event.png";
 import portfolio from "../../../assets/portfolio.png";
 import contact from "../../../assets/contact.png";
+import traffic from "../../../assets/traffic.png";
+
 import { BarChart } from "@mui/x-charts";
 import axios from "axios";
 import { Doughnut } from "react-chartjs-2";
@@ -121,7 +123,7 @@ function Dashboard() {
             <div className="font-bold pl-2 mt-3 text-4xl">60</div>
           </div>
           <div>
-            <img src={contact} alt="" />
+            <img className="w-[37.25px] h-[37.25px]" src={traffic} alt="" />
           </div>
         </div>
       </section>

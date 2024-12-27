@@ -115,7 +115,7 @@ const ContactUs = () => {
         </p>
       </motion.div>
       <div className="flex items-center justify-center p-12 text-white">
-        <div className="mx-auto w-full max-w-[550px] bg-[white] shadow-lg p-5 rounded-lg">
+        <div className="mx-auto w-full max-w-[550px] bg-[white] shadow p-5 rounded-lg">
           <form onSubmit={handleSubmit}>
             {Object.keys(contactUs).map((field) => (
               <div className="mb-5" key={field}>

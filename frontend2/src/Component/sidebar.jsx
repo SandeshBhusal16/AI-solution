@@ -7,7 +7,12 @@ import { BsChatLeftFill } from "react-icons/bs";
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [logout, setIsLogout] = useState();
+  const [model, setModel] = useState();
 
+  const handleModel = () => {
+    setModel(!model);
+  };
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -38,7 +43,7 @@ const Sidebar = () => {
 
   const navigate = useNavigate();
 
-  const logout = () => {
+  const handlelogout = () => {
     localStorage.removeItem("role");
     localStorage.removeItem("token");
     navigate("/");
@@ -82,7 +87,7 @@ const Sidebar = () => {
             ))}
             <div
               className="flex gap-2 items-center cursor-pointer"
-              onClick={logout}
+              onClick={handleModel}
             >
               <div>
                 <LuLogOut className="" />
@@ -102,6 +107,35 @@ const Sidebar = () => {
           </div>
         </div>
       </div>
+
+      {model && (
+        <>
+          <div className="w-[100%] absolute h-screen bg-black z-10 opacity-50">
+            {" "}
+          </div>
+          <div className="fixed top-[50%] bg-[white] shadow-md rounded-md right-[40%] z-10 ">
+            <div className="flex flex-col  justify-center gap-2 px-5 py-7">
+              <div className="flex justify-center">
+                Are you sure Do you want to Logout ?
+              </div>
+              <div className="flex justify-center gap-2 items-center">
+                <button
+                  onClick={() => setModel(false)}
+                  className="border px-8 py-1 rounded-md"
+                >
+                  No
+                </button>
+                <button
+                  onClick={handlelogout}
+                  className="border px-8 py-1 rounded-md bg-[blue] text-white"
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

@@ -41,7 +41,7 @@ class AuthService {
       let rules = Joi.object({
         currentPassword: Joi.string().required(),
         newPassword: Joi.string().required(),
-        confirmPassword: Joi.string().required(),
+        confirmPassword: Joi.string().required().valid(Joi.ref("newPassword")),
       });
       let response = await rules.validateAsync(password);
       return response;

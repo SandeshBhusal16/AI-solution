@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5"; // Import eye icons
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const Login = () => {
     password: "",
   });
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false); // State for password visibility
   const navigate = useNavigate();
 
   const ValidationSchema = Yup.object({
@@ -83,6 +85,10 @@ const Login = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
+
   return (
     <>
       <Link
@@ -142,13 +148,26 @@ const Login = () => {
                 >
                   Password
                 </label>
-                <input
-                  className="outline-none text-[14px] w-[344px] font-semibold rounded-sm border border-gray-400 p-1"
-                  type="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
+                <div className="relative w-[344px]">
+                  <input
+                    className="outline-none text-[14px] w-full font-semibold rounded-sm border border-gray-400 p-1"
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    type="button"
+                    onClick={togglePasswordVisibility}
+                    className="absolute right-2 top-2 text-gray-600"
+                  >
+                    {showPassword ? (
+                      <IoEyeOffOutline size={20} />
+                    ) : (
+                      <IoEyeOutline size={20} />
+                    )}
+                  </button>
+                </div>
                 {errors.password && (
                   <div className="text-red-500 text-sm">{errors.password}</div>
                 )}

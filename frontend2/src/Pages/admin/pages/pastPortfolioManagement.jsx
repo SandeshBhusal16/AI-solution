@@ -41,12 +41,12 @@ const PastPortfolioManagement = () => {
   const validationSchema = yup.object({
     title: yup.string().required("Title is required"),
     description: yup.string().required("Description is required"),
-    image: yup.string().required("Image URL is required"),
+    image: yup.string().required("Image is required"),
     rating: yup
-      .number()
+      .string()
       .required("Rating is required")
-      .min(1)
-      .max(5),
+      .min(1, "Rating must be at least 1")
+      .max(5, "Rating must be at most 5"),
   });
 
   const validateField = async (name, value) => {
@@ -338,27 +338,32 @@ const PastPortfolioManagement = () => {
       </div>
 
       {deleteModel && (
-        <div className="fixed top-[50%] bg-[white] shadow-md rounded-md right-[40%]">
-          <div className="flex flex-col  justify-center gap-2 px-5 py-7">
-            <div className="flex justify-center">
-              Are you sure Do you want to delete this ?
-            </div>
-            <div className="flex justify-center gap-2 items-center">
-              <button
-                onClick={() => setDeleteModel(false)}
-                className="border px-8 py-1 rounded-md"
-              >
-                No
-              </button>
-              <button
-                onClick={handleDelete}
-                className="border px-8 py-1 rounded-md bg-[blue] text-white"
-              >
-                Yes
-              </button>
+        <>
+          <div className="w-full  absolute top-0 left-0 h-screen bg-black z-10 opacity-50">
+            {" "}
+          </div>
+          <div className="fixed top-[50%] bg-[white] shadow-md rounded-md right-[40%] z-10">
+            <div className="flex flex-col  justify-center gap-2 px-5 py-7">
+              <div className="flex justify-center">
+                Are you sure Do you want to delete this ?
+              </div>
+              <div className="flex justify-center gap-2 items-center">
+                <button
+                  onClick={() => setDeleteModel(false)}
+                  className="border px-8 py-1 rounded-md"
+                >
+                  No
+                </button>
+                <button
+                  onClick={handleDelete}
+                  className="border px-8 py-1 rounded-md bg-[blue] text-white"
+                >
+                  Yes
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
       {/* Drawer */}
       {isDrawerOpen && (
@@ -388,15 +393,19 @@ const PastPortfolioManagement = () => {
                 onChange={handleInputChange}
                 className="border p-2 rounded-lg font-[400]"
               />
+              {errors.title && (
+                <div className="text-red-500 text-sm font-[400]">
+                  {errors.title}
+                </div>
+              )}
             </div>
-            {errors.title && <div className="text-red-500">{errors.title}</div>}
             <div className="flex flex-col font-[500] gap-1">
               <label>
                 {" "}
                 Description <span className="text-[red]">*</span>
               </label>
 
-              <input
+              <textarea
                 type="text"
                 name="description"
                 placeholder="Description"
@@ -404,10 +413,12 @@ const PastPortfolioManagement = () => {
                 onChange={handleInputChange}
                 className="border p-2 rounded-lg font-[400]"
               />
+              {errors.description && (
+                <div className="text-red-500 text-sm font-[400]">
+                  {errors.description}
+                </div>
+              )}
             </div>
-            {errors.description && (
-              <div className="text-red-500">{errors.description}</div>
-            )}
             <div className="flex flex-col font-[500] gap-1">
               <label>
                 {" "}
@@ -422,8 +433,12 @@ const PastPortfolioManagement = () => {
                 }
                 className="border p-2 rounded-lg font-[400]"
               />
+              {errors.image && (
+                <div className="text-red-500 text-sm font-[400]">
+                  {errors.image}
+                </div>
+              )}
             </div>
-            {errors.image && <div className="text-red-500">{errors.image}</div>}
 
             <div className="flex flex-col font-[500] gap-1">
               <label>
@@ -438,10 +453,12 @@ const PastPortfolioManagement = () => {
                 onChange={handleInputChange}
                 className="border p-2 rounded-lg font-[400]"
               />
+              {errors.rating && (
+                <div className="text-red-500 text-sm font-[400]">
+                  {errors.rating}
+                </div>
+              )}
             </div>
-            {errors.rating && (
-              <div className="text-red-500">{errors.rating}</div>
-            )}
 
             <button
               type="submit"
