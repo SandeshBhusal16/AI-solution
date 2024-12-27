@@ -39,9 +39,9 @@ class AuthService {
   updatePass = async (password) => {
     try {
       let rules = Joi.object({
-        currentPass: Joi.string().required(),
-        newPass: Joi.string().required(),
-        confirmPass: Joi.string().required(),
+        currentPassword: Joi.string().required(),
+        newPassword: Joi.string().required(),
+        confirmPassword: Joi.string().required(),
       });
       let response = await rules.validateAsync(password);
       return response;

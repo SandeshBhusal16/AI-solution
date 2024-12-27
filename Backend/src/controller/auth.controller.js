@@ -67,6 +67,25 @@ class AuthController {
     }
   };
 
+  userDetails = async (req, res, next) => {
+    try {
+      let id = req.params.id;
+      let response = await usersrv.findUserById(id);
+      if (!response) {
+        next({
+          msg: "User not found ",
+        });
+      }
+      res.json({
+        data: response,
+        code: 200,
+        msg: "User Details fetched successfully",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   changePassword = async (req, res, next) => {
     try {
       let id = req.params.id;
@@ -81,17 +100,17 @@ class AuthController {
 
       let currentpass = userDetails.password;
 
-      let matchPass = await bcrypt.compare(data.currentPass, currentpass);
+      let matchPass = await bcrypt.compare(data.currentPassword, currentpass);
 
       if (!matchPass) {
         next({
           msg: "curent password doesnot match",
         });
       }
-      let newPassword = await bcrypt.hashSync(data.newPass, 10);
+      let newPass = await bcrypt.hashSync(data.newPassword, 10);
 
       let response = await UserModel.findByIdAndUpdate(id, {
-        password: newPassword,
+        password: newPass,
       });
       console.log(response);
 
