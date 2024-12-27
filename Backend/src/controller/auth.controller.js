@@ -1,6 +1,7 @@
 const usersrv = require("../service/auth.service");
 const bcrypt = require("bcryptjs");
 const jwtToken = require("jsonwebtoken");
+const UserModel = require("../model/auth.model");
 
 class AuthController {
   login = async (req, res, next) => {
@@ -60,6 +61,65 @@ class AuthController {
       }
     } catch (error) {
       console.log("register", error);
+      next({
+        msg: error,
+      });
+    }
+  };
+
+  userDetails = async (req, res, next) => {
+    try {
+      let id = req.params.id;
+      let response = await usersrv.findUserById(id);
+      if (!response) {
+        next({
+          msg: "User not found ",
+        });
+      }
+      res.json({
+        data: response,
+        code: 200,
+        msg: "User Details fetched successfully",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  changePassword = async (req, res, next) => {
+    try {
+      let id = req.params.id;
+      let data = req.body;
+      await usersrv.updatePass(data);
+      let userDetails = await usersrv.findUserById(id);
+      if (!userDetails) {
+        next({
+          msg: "User not found",
+        });
+      }
+
+      let currentpass = userDetails.password;
+
+      let matchPass = await bcrypt.compare(data.currentPassword, currentpass);
+
+      if (!matchPass) {
+        next({
+          msg: "curent password doesnot match",
+        });
+      }
+      let newPass = await bcrypt.hashSync(data.newPassword, 10);
+
+      let response = await UserModel.findByIdAndUpdate(id, {
+        password: newPass,
+      });
+      console.log(response);
+
+      res.json({
+        msg: "password update successfully",
+      });
+    } catch (error) {
+      console.log(error);
+
       next({
         msg: error,
       });

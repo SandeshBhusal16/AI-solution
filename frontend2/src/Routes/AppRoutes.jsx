@@ -18,6 +18,7 @@ import PastPortfolioManagement from "../Pages/admin/pages/pastPortfolioManagemen
 import ProtectedRoute from "./protectedRoute";
 import ContactUsManagement from "../Pages/admin/pages/contactUsManagement";
 import Chatbotify from "../Component/simpleChatbot";
+import Setting from "../Pages/admin/pages/setting";
 
 const AppRoutes = () => {
   return (
@@ -42,6 +43,7 @@ const AppRoutes = () => {
                   path="/inquiryManagement"
                   element={<ContactUsManagement />}
                 />
+                <Route path="/settings" element={<Setting />} />
               </Routes>
             </AdminLayout>
           </ProtectedRoute>

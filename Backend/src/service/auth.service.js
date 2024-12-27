@@ -35,6 +35,20 @@ class AuthService {
       throw exception;
     }
   };
+
+  updatePass = async (password) => {
+    try {
+      let rules = Joi.object({
+        currentPassword: Joi.string().required(),
+        newPassword: Joi.string().required(),
+        confirmPassword: Joi.string().required(),
+      });
+      let response = await rules.validateAsync(password);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
   createUser = async (data) => {
     try {
       const user = new UserModel(data);
@@ -56,7 +70,7 @@ class AuthService {
 
   findUserById = async (id) => {
     try {
-      let response = await UserModel.findById(id, { password: 0 });
+      let response = await UserModel.findById(id);
       return response;
     } catch (exception) {
       throw exception;
