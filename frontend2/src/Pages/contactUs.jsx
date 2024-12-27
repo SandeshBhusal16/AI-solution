@@ -123,8 +123,10 @@ const ContactUs = () => {
                   htmlFor={field}
                   className="mb-3 block text-base font-medium text-[#6963d2]"
                 >
-                  {field.charAt(0).toUpperCase() + field.slice(1)}
+                  {field.charAt(0).toUpperCase() + field.slice(1)}{" "}
+                  <span className="text-[red]">*</span>
                 </label>
+
                 <input
                   type="text"
                   id={field}

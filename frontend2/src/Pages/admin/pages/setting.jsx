@@ -1,11 +1,13 @@
-import axios from "axios";
+import React from "react";
 import admin from "../../../assets/client1.png";
 import { useEffect, useState } from "react";
 import "./setting.css";
 import { jwtDecode } from "jwt-decode";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { IoEyeOutline } from "react-icons/io5";
-import { IoEyeOffOutline } from "react-icons/io5";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import axios from "axios";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,16 +16,31 @@ const Setting = () => {
   const userDetails = jwtDecode(Token);
 
   const [userDetail, setUserDetails] = useState();
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-  });
-  const [errors, setErrors] = useState({});
   const [showPasswords, setShowPasswords] = useState({
     currentPassword: false,
     newPassword: false,
     confirmPassword: false,
+  });
+
+  const validationSchema = yup.object().shape({
+    currentPassword: yup.string().required("Current password is required"),
+    newPassword: yup
+      .string()
+      .required("New password is required")
+      .min(6, "Password must be at least 6 characters long"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("newPassword"), null], "Passwords must match")
+      .required("Confirm password is required"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(validationSchema),
   });
 
   useEffect(() => {
@@ -41,36 +58,6 @@ const Setting = () => {
     }
   };
 
-  const validationSchema = yup.object().shape({
-    currentPassword: yup.string().required("Current password is required"),
-    newPassword: yup
-      .string()
-      .required("New password is required")
-      .min(6, "Password must be at least 6 characters long"),
-    confirmPassword: yup
-      .string()
-      .required("is required")
-      .oneOf([yup.ref("newPassword"), null], "Password must match"),
-  });
-
-  const validateField = async (fieldName, value) => {
-    try {
-      await validationSchema.validateAt(fieldName, { [fieldName]: value });
-      setErrors((prevErrors) => ({ ...prevErrors, [fieldName]: undefined }));
-    } catch (error) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [fieldName]: error.message,
-      }));
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPasswordData({ ...passwordData, [name]: value });
-    validateField(name, value);
-  };
-
   const togglePasswordVisibility = (field) => {
     setShowPasswords((prevState) => ({
       ...prevState,
@@ -78,19 +65,14 @@ const Setting = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const onSubmit = async (data) => {
     try {
-      await validationSchema.validate(passwordData, { abortEarly: false });
-
       await axios.put(
         `http://localhost:3005/auth/updatepass/${userDetails.id}`,
-        passwordData
+        data
       );
-      setPasswordData({
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      });
+
+      reset();
 
       toast.success("Password Updated successfully", {
         position: "top-right",
@@ -104,16 +86,11 @@ const Setting = () => {
         transition: Bounce,
       });
     } catch (error) {
-      if (error.inner) {
-        const validationErrors = {};
-        error.inner.forEach((err) => {
-          validationErrors[err.path] = err.message;
-        });
-        setErrors(validationErrors);
-      } else {
-        console.log(error);
-      }
-      toast.error("Something went wrong", {
+      console.log(error);
+      let errormsg = error.response.data.msg;
+      console.log(errormsg);
+
+      toast.error(errormsg, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -136,54 +113,47 @@ const Setting = () => {
         </div>
         <div className="flex gap-5 mt-4">
           <div className="flex flex-col gap-[2px] w-[175px] border-r pr-5">
-            <label className="font-bold" htmlFor="">
-              Name
-            </label>
+            <label className="font-bold">Name</label>
             <span>
               {userDetail?.fname} {userDetail?.lname}
             </span>
           </div>
 
           <div className="flex flex-col gap-[2px]">
-            <label className="font-bold" htmlFor="">
-              Email
-            </label>
+            <label className="font-bold">Email</label>
             <span>{userDetail?.email}</span>
           </div>
         </div>
 
         <div className="flex gap-5 mt-2">
           <div className="flex flex-col gap-[2px] w-[175px] border-r pr-5">
-            <label className="font-bold" htmlFor="">
-              Phone Number
-            </label>
-            <span> {userDetail?.phone}</span>
+            <label className="font-bold">Phone Number</label>
+            <span>{userDetail?.phone}</span>
           </div>
 
           <div className="flex flex-col gap-[2px]">
-            <label className="font-bold" htmlFor="">
-              Role
-            </label>
-            <span> {userDetail?.role}</span>
+            <label className="font-bold">Role</label>
+            <span>{userDetail?.role}</span>
           </div>
         </div>
       </div>
 
       <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4">Change Password</h2>
-        <div className="flex flex-col gap-4 max-w-md">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 max-w-md"
+        >
           <div>
             <label className="block font-bold mb-2" htmlFor="currentPassword">
-              Current Password
+              Current Password <span className="text-[red]">*</span>
             </label>
             <div className="relative">
               <input
                 type={showPasswords.currentPassword ? "text" : "password"}
                 id="currentPassword"
-                name="currentPassword"
-                value={passwordData.currentPassword}
-                onChange={handleInputChange}
-                className="w-full border px-3 py-2 rounded-lg"
+                {...register("currentPassword")}
+                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:shadow-md"
               />
               <button
                 type="button"
@@ -198,22 +168,22 @@ const Setting = () => {
               </button>
             </div>
             {errors.currentPassword && (
-              <p className="text-red-500 text-sm">{errors.currentPassword}</p>
+              <p className="text-red-500 text-sm">
+                {errors.currentPassword.message}
+              </p>
             )}
           </div>
 
           <div>
             <label className="block font-bold mb-2" htmlFor="newPassword">
-              New Password
+              New Password <span className="text-[red]">*</span>
             </label>
             <div className="relative">
               <input
                 type={showPasswords.newPassword ? "text" : "password"}
                 id="newPassword"
-                name="newPassword"
-                value={passwordData.newPassword}
-                onChange={handleInputChange}
-                className="w-full border px-3 py-2 rounded-lg"
+                {...register("newPassword")}
+                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:shadow-md"
               />
               <button
                 type="button"
@@ -228,22 +198,22 @@ const Setting = () => {
               </button>
             </div>
             {errors.newPassword && (
-              <p className="text-red-500 text-sm">{errors.newPassword}</p>
+              <p className="text-red-500 text-sm">
+                {errors.newPassword.message}
+              </p>
             )}
           </div>
 
           <div>
             <label className="block font-bold mb-2" htmlFor="confirmPassword">
-              Confirm Password
+              Confirm Password <span className="text-[red]">*</span>
             </label>
             <div className="relative">
               <input
                 type={showPasswords.confirmPassword ? "text" : "password"}
                 id="confirmPassword"
-                name="confirmPassword"
-                value={passwordData.confirmPassword}
-                onChange={handleInputChange}
-                className="w-full border px-3 py-2 rounded-lg"
+                {...register("confirmPassword")}
+                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:shadow-md"
               />
               <button
                 type="button"
@@ -258,17 +228,19 @@ const Setting = () => {
               </button>
             </div>
             {errors.confirmPassword && (
-              <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
+              <p className="text-red-500 text-sm">
+                {errors.confirmPassword.message}
+              </p>
             )}
           </div>
 
           <button
-            onClick={handleSubmit}
+            type="submit"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             Update Password
           </button>
-        </div>
+        </form>
       </div>
       <ToastContainer />
     </>
