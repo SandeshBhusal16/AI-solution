@@ -22,6 +22,36 @@ class GalleryService {
       console.log(error);
     }
   };
+
+  getimagebyId = async (id) => {
+    try {
+      const response = await Gallery2Model.findById(id);
+      return response;
+    } catch (exception) {
+      throw exception;
+    }
+  };
+
+  UpdatePost = async (id, data) => {
+    try {
+      let response = await Gallery2Model.findByIdAndUpdate(id, {
+        $set: data,
+      });
+      return response;
+    } catch (exception) {
+      throw exception;
+    }
+  };
+  deletePost = async (id) => {
+    try {
+      let response = await Gallery2Model.findByIdAndDelete(id);
+      console.log(response);
+
+      return response;
+    } catch (exc) {
+      throw exc;
+    }
+  };
 }
 
 const Gallery2Srv = new GalleryService();

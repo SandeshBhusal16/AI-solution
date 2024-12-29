@@ -14,5 +14,12 @@ Gallery2Routes.post(
   Gallery2ctrl.createGallery
 );
 Gallery2Routes.get("/getall", Gallery2ctrl.getall);
+Gallery2Routes.put(
+  "/updateImage/:id",
+  dirPath,
+  uploader.single("image"),
+  Gallery2ctrl.UpdateGallery
+);
+Gallery2Routes.delete("/deleteImage/:id", Gallery2ctrl.deleteGallery);
 
 module.exports = Gallery2Routes;

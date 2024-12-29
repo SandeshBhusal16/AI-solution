@@ -39,7 +39,7 @@ class EventService {
   // Fetch all events
   GetAllEvents = async () => {
     try {
-      const response = await EventModel.find();
+      const response = await EventModel.find().sort("-1");
       return response;
     } catch (exception) {
       console.error("Error while fetching all events:", exception);

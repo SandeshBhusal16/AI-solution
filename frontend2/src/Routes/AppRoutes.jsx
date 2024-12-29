@@ -20,6 +20,7 @@ import ContactUsManagement from "../Pages/admin/pages/contactUsManagement";
 import Chatbotify from "../Component/simpleChatbot";
 import Setting from "../Pages/admin/pages/setting";
 import Gallery from "../Pages/gallery";
+import GalleryManagement from "../Pages/admin/pages/gallerymanagement";
 
 const AppRoutes = () => {
   return (
@@ -39,6 +40,10 @@ const AppRoutes = () => {
                 <Route
                   path="/pastPortfolioManagenemt"
                   element={<PastPortfolioManagement />}
+                />
+                <Route
+                  path="/galleryManagement"
+                  element={<GalleryManagement />}
                 />
                 <Route
                   path="/inquiryManagement"

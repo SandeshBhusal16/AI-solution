@@ -38,20 +38,25 @@ const Gallery = () => {
             </p>
           </div>
         </motion.div>
-        <div className="min-h-screen grid grid-cols-3 px-[200px]  gap-5   justify-center bg-blue-50 m-3">
-          {gallerydata?.map((item) => (
-            <div className="relative h-[300px] group ">
-              <img
-                className="w-[300px] h-[300px] rounded-xl"
-                src={item.image}
-                alt={item.title}
-              />
-              <span className="absolute  p-5 text-[#fff] bottom-0 z-10 w-[300px] h-[75px] hidden group-hover:block justify-center items-center  rounded-b-xl">
-                {item.title}
-              </span>
-              <div className="absolute bg-[#0000006b] p-5 bottom-0 w-[300px] h-[75px] hidden group-hover:block justify-center items-center  rounded-b-xl"></div>
-            </div>
-          ))}
+        <div className="px-[100px] m-3 bg-blue-50">
+          <div className="columns-3 md:columns-3 lg:columns-4 gap-5">
+            {gallerydata?.map((item, index) => (
+              <div
+                key={index}
+                className="relative group mb-5 break-inside-avoid"
+              >
+                <img
+                  className="w-full rounded-xl"
+                  src={item.image}
+                  alt={item.title}
+                />
+                <span className="absolute p-5 text-[#fff] bottom-0 z-10 w-full h-full hidden group-hover:block text-center items-center rounded-b-xl">
+                  {item.title}
+                </span>
+                <div className="absolute rounded-xl bg-[#0000006b] p-5 bottom-0 w-full h-full hidden group-hover:block text-center items-center rounded-b-xl"></div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

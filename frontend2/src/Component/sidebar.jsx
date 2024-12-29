@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaHome, FaUsers, FaCog, FaChartBar } from "react-icons/fa";
+import { TfiGallery } from "react-icons/tfi";
 import logout from "../assets/logout.png";
 import { LuLogOut } from "react-icons/lu";
 import { BsChatLeftFill } from "react-icons/bs";
@@ -32,6 +33,11 @@ const Sidebar = () => {
       path: "/admin/pastPortfolioManagenemt",
       name: "Past Portfolio Management",
       icon: <FaChartBar />,
+    },
+    {
+      path: "/admin/galleryManagement",
+      name: "GalleryManagement",
+      icon: <TfiGallery />,
     },
     {
       path: "/admin/inquiryManagement",
