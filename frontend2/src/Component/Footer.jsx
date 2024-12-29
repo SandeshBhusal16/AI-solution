@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
         <div className="h-[2px] bg-gray-100 w-[200px] mb-1"></div>
 
-        <p>© 2024 AI Solution. All rights reserved. @Sandesh Bhusal</p>
+        <p>© 2024 AI Solution. All rights reserved.</p>
       </div>
     </div>
   );

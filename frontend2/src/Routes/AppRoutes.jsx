@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Router } from "react-router-dom";
 
 import Home from "../Pages/Home";
 import Blog from "../Component/Blog";
@@ -19,6 +19,7 @@ import ProtectedRoute from "./protectedRoute";
 import ContactUsManagement from "../Pages/admin/pages/contactUsManagement";
 import Chatbotify from "../Component/simpleChatbot";
 import Setting from "../Pages/admin/pages/setting";
+import Gallery from "../Pages/gallery";
 
 const AppRoutes = () => {
   return (
@@ -64,6 +65,8 @@ const AppRoutes = () => {
               <Route path="/event" element={<Event />} />
               <Route path="/about" element={<About />} />
               <Route path="/contactUs" element={<ContactUs />} />
+              <Route path="/gallery" element={<Gallery />} />
+
               {/* Add more public routes here */}
             </Routes>
             <Footer />

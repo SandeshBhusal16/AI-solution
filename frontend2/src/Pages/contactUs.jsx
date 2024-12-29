@@ -5,6 +5,15 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
 import * as yup from "yup";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPhoneAlt,
+  FaTwitter,
+} from "react-icons/fa";
+import { CiLinkedin, CiLocationOn } from "react-icons/ci";
+import Map from "../Component/googlemap";
 
 const ContactUs = () => {
   const navigation = useNavigate();
@@ -114,14 +123,51 @@ const ContactUs = () => {
           specific job requirements, our team is here to help.
         </p>
       </motion.div>
-      <div className="flex items-center justify-center p-12 text-white">
-        <div className="mx-auto w-full max-w-[550px] bg-[white] shadow p-5 rounded-lg">
+      <div className="flex  gap-2 justify-center p-12 ">
+        <div className="flex flex-col gap-5 mt-10">
+          <div className="flex items-center gap-3">
+            <FaPhoneAlt color="blue" fontSize={"25px"} />
+            <span>+44 117 2345678</span>
+          </div>
+          <div>
+            <div className="flex items-center gap-3">
+              <CiLocationOn color="blue" fontSize={"25px"} />
+              <span>UK, SunderLand</span>
+            </div>
+          </div>
+          <div className="flex gap-2   mb-2 ">
+            <FaFacebookF
+              className="cursor-pointer text-[#4f46e5] transition"
+              size={20}
+            />
+            <FaTwitter
+              className="cursor-pointer text-[#4f46e5] transition"
+              size={20}
+            />
+            <FaInstagram
+              className="cursor-pointer text-[#4f46e5] transition"
+              size={20}
+            />
+            <FaLinkedinIn
+              className="cursor-pointer text-[#4f46e5] transition"
+              size={20}
+            />
+          </div>
+          <Map />
+        </div>
+        <div
+          className="mx-auto w-full max-w-[550px] bg-[white] p-5 rounded-lg"
+          style={{
+            boxShadow:
+              "0px 0px 4px rgba(226, 232, 240, 0.75), 0px 4px 12px #E2E8F0",
+          }}
+        >
           <form onSubmit={handleSubmit}>
             {Object.keys(contactUs).map((field) => (
               <div className="mb-5" key={field}>
                 <label
                   htmlFor={field}
-                  className="mb-3 block text-base font-medium text-[#6963d2]"
+                  className="mb-3 block text-base font-bold text-[blue]"
                 >
                   {field.charAt(0).toUpperCase() + field.slice(1)}{" "}
                   <span className="text-[red]">*</span>

@@ -32,6 +32,7 @@ const Navbar = () => {
           { path: "/blog", label: "Blog" },
           { path: "/event", label: "Event" },
           { path: "/past-portfolio", label: "Past Portfolio" },
+          { path: "/gallery", label: "Gallery" },
           { path: "/about", label: "About Us" },
           { path: "/contactUs", label: "Contact Us" },
         ].map(({ path, label }) => (
@@ -53,7 +54,7 @@ const Navbar = () => {
         {!nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
       </div>
 
-      <div
+      {/* <div
         className={
           nav
             ? "fixed left-0 top-0 w-[60%] h-full border-r border-gray-900 bg-[#000300] ease-in-out duration-500"
@@ -72,7 +73,7 @@ const Navbar = () => {
           <li className="p-4 border-b border-gray-600">About</li>
           <li className="p-4">Contact</li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import contact from "../../../assets/contact.png";
 import { IoClose, IoEyeOutline } from "react-icons/io5";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUsManagement = () => {
   const [allContact, setAllContact] = useState();
@@ -34,6 +36,17 @@ const ContactUsManagement = () => {
       setIsOpen(false);
       setIsSelected(null);
       fetchInquiry();
+      toast.success("Inquiry Delete Successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -215,6 +228,7 @@ const ContactUsManagement = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </>
   );
 };
