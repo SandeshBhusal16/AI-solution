@@ -291,7 +291,7 @@ const EventManagement = () => {
                     {moment(event.startdate).format("MMMM Do YYYY")}
                   </td>
                   <td className="px-6 py-4">
-                    {moment(event.Enddate).format("MMMM Do YYYY")}
+                    {moment(event.enddate).format("MMMM Do YYYY")}
                   </td>
                   <td className="px-6 py-4">
                     <img

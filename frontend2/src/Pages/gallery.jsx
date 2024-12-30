@@ -38,7 +38,7 @@ const Gallery = () => {
             </p>
           </div>
         </motion.div>
-        <div className="px-[100px] m-3 bg-blue-50">
+        <div className="px-[100px] m-3 bg-blue-50 p-5">
           <div className="columns-3 md:columns-3 lg:columns-4 gap-5">
             {gallerydata?.map((item, index) => (
               <div
@@ -50,10 +50,10 @@ const Gallery = () => {
                   src={item.image}
                   alt={item.title}
                 />
-                <span className="absolute p-5 text-[#fff] bottom-0 z-10 w-full h-full hidden group-hover:block text-center items-center rounded-b-xl">
+                {/* <span className="absolute p-5 text-[#fff] bottom-0 z-10 w-full h-full hidden group-hover:block text-center items-center rounded-b-xl">
                   {item.title}
                 </span>
-                <div className="absolute rounded-xl bg-[#0000006b] p-5 bottom-0 w-full h-full hidden group-hover:block text-center items-center rounded-b-xl"></div>
+                <div className="absolute rounded-xl bg-[#0000006b] p-5 bottom-0 w-full h-full hidden group-hover:block text-center items-center rounded-b-xl"></div> */}
               </div>
             ))}
           </div>

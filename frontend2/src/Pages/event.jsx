@@ -20,7 +20,7 @@ const Event = () => {
     }
   };
 
-  console.log("hello", allevent);
+  // console.log(allevent?.name, allevent);
 
   const currentDate = new Date().setHours(0, 0, 0, 0);
 
@@ -48,8 +48,10 @@ const Event = () => {
           <button
             onClick={() => setActive("all")}
             className={`${
-              active === "all" ? "text-[#4f46e5] font-[600]" : ""
-            } hover:text-[#4f46e5] font-[600]`}
+              active === "all"
+                ? "text-[#4f46e5] font-[600] border border-[#4f46e5] p-2 px-5 rounded-3xl"
+                : "border border-[#c1c0c8] p-2 px-5 rounded-3xl"
+            } hover:text-[#4f46e5] font-[600] hover:border-[#4f46e5] `}
           >
             All Events
             {active === "all" && (
@@ -59,8 +61,10 @@ const Event = () => {
           <button
             onClick={() => setActive("today")}
             className={`${
-              active === "today" ? "text-[#4f46e5] font-[600]" : ""
-            } hover:text-[#4f46e5] font-[600]`}
+              active === "today"
+                ? "text-[rgb(84,82,122)] font-[600] border border-[#4f46e5] p-2 px-5 rounded-3xl"
+                : "border border-[#c1c0c8] p-2 px-5 rounded-3xl"
+            } hover:text-[#4f46e5] font-[600] hover:border-[#4f46e5] `}
           >
             Today's Events
             {active === "today" && (
@@ -70,8 +74,10 @@ const Event = () => {
           <button
             onClick={() => setActive("Upcoming")}
             className={`${
-              active === "Upcoming" ? "text-[#4f46e5] font-[600]" : ""
-            } hover:text-[#4f46e5] font-[600]`}
+              active === "Upcoming"
+                ? "text-[#4f46e5] font-[600] border border-[#4f46e5] p-2 px-5 rounded-3xl"
+                : "border border-[#c1c0c8] p-2 px-5 rounded-3xl"
+            } hover:text-[#4f46e5] font-[600] hover:border-[#4f46e5] `}
           >
             Upcoming Events
             {active === "Upcoming" && (
@@ -82,8 +88,10 @@ const Event = () => {
           <button
             onClick={() => setActive("past")}
             className={`${
-              active === "past" ? "text-[#4f46e5] font-[600]" : ""
-            } hover:text-[#4f46e5] font-[600]`}
+              active === "past"
+                ? "text-[#4f46e5] font-[600] border border-[#4f46e5] p-2 px-5 rounded-3xl"
+                : "border border-[#c1c0c8] p-2 px-5 rounded-3xl"
+            } hover:text-[#4f46e5] font-[600] hover:border-[#4f46e5] `}
           >
             Past Events
             {active === "past" && (
@@ -107,7 +115,7 @@ const Event = () => {
                     classname={"bg-[white] w-[340px]"}
                     imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
                     src={allevent.image}
-                    title={"hello"}
+                    title={allevent?.name}
                     startDate={moment(allevent.startdate).format(
                       "MMMM Do YYYY"
                     )}
@@ -151,7 +159,7 @@ const Event = () => {
                     classname={"bg-[white] w-[340px]"}
                     imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
                     src={allevent.image}
-                    title={"hello"}
+                    title={allevent?.name}
                     startDate={moment(allevent.startdate).format(
                       "MMMM Do YYYY"
                     )}
@@ -188,7 +196,7 @@ const Event = () => {
                   classname={"bg-[white] w-[340px]"}
                   imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
                   src={allevent.image}
-                  title={"hello"}
+                  title={allevent?.name}
                   startDate={moment(allevent.startdate).format("MMMM Do YYYY")}
                   endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
                   location={allevent.location}
@@ -212,7 +220,7 @@ const Event = () => {
                     classname={"bg-[white] w-[340px]"}
                     imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
                     src={allevent.image}
-                    title={"hello"}
+                    title={allevent?.name}
                     startDate={moment(allevent.startdate).format(
                       "MMMM Do YYYY"
                     )}

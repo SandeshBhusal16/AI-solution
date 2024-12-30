@@ -3,6 +3,7 @@ import event from "../../../assets/event.png";
 import portfolio from "../../../assets/portfolio.png";
 import contact from "../../../assets/contact.png";
 import traffic from "../../../assets/traffic.png";
+import gallery from "../../../assets/gallery.png";
 
 import { BarChart } from "@mui/x-charts";
 import axios from "axios";
@@ -76,8 +77,8 @@ function Dashboard() {
   return (
     <>
       <div className="text-3xl mb-8 font-bold">Dashboard</div>
-      <section className="flex gap-4">
-        <div className="border flex gap-4  max-w-[263px] rounded-[12px] p-4 mb-8 shadow-lg ">
+      <section className="flex flex-wrap gap-4">
+        <div className="border flex gap-4  max-w-[263px] rounded-[12px] p-4  shadow-lg ">
           <div>
             <div className="font-semibold text-md">
               Total number of &nbsp; Event
@@ -91,7 +92,7 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="border flex gap-4  max-w-[263px] rounded-[12px] p-4 mb-8 shadow-lg ">
+        <div className="border flex gap-4  max-w-[263px] rounded-[12px] p-4  shadow-lg ">
           <div>
             <div className="font-semibold text-md">
               Total number of Portfolio
@@ -105,7 +106,19 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="border flex gap-4  max-w-[263px] rounded-[12px] p-4 mb-8 shadow-lg ">
+        <div className="border flex gap-4  max-w-[263px] rounded-[12px] p-4  shadow-lg ">
+          <div>
+            <div className="font-semibold text-md">Total number of Images</div>
+            <div className="font-bold pl-2 text-4xl">
+              {AllData?.allImage?.length}
+            </div>
+          </div>
+          <div>
+            <img className="w-[40px] h-[40px]" src={gallery} alt="" />
+          </div>
+        </div>
+
+        <div className="border flex gap-4  max-w-[263px] rounded-[12px] p-4  shadow-lg ">
           <div>
             <div className="font-semibold text-md">Total number of Inquiry</div>
             <div className="font-bold pl-2 text-4xl">
@@ -172,7 +185,7 @@ function Dashboard() {
               classname={"bg-[white] w-[340px]"}
               imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
               src={events.image}
-              title={"hello"}
+              title={events?.name}
               startDate={moment(events.startdate).format("MMMM Do YYYY")}
               endDate={moment(events.enddate).format("MMMM Do YYYY")}
               location={events.location}

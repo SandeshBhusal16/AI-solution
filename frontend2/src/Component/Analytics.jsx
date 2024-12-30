@@ -10,6 +10,7 @@ import service5 from "../assets/service5.gif";
 import client1 from "../assets/client1.png";
 import client2 from "../assets/client3.jpg";
 import client3 from "../assets/client2.png";
+import client4 from "../assets/client4.jpg";
 
 import ServicesCard from "./servicesCard";
 
@@ -50,24 +51,31 @@ const Analytics = () => {
   const clientResponse = [
     {
       imgsrc: client1,
-      title: "John Carter",
-      position: "CTO, TechCorp",
+      title: "David Wisseman",
+      position: " Owner at Warner Farm",
       description:
-        "AI-Solutions transformed how we handle employee inquiries, saving us countless hours and boosting satisfaction rates across the board.",
+        "Turbo Farm has completely transformed the way we approachagriculture. With its AI-driven insights and automation, we’ve seen a significant boost in crop yields while reducing resource usage.",
     },
     {
       imgsrc: client2,
-      title: "Sophia Lee ",
-      position: "Product Manager, Innovatech",
+      title: "Michael Reed",
+      position: "Supply Chain Manager at Vaux Brewery",
       description:
-        "Their prototyping solutions are a game-changer. We reduced our design cycle by 40% with their affordable and intuitive tools.",
+        "Log AI has revolutionized our inventory management system. The AI-driven optimization has helped us maintain perfect stock levels, reducing both overstock and stockouts.",
     },
     {
       imgsrc: client3,
-      title: "Rajesh Mehta",
-      position: "CEO, VisionAI",
+      title: "Sarah Lampard",
+      position: "Independent Investor",
       description:
-        "Partnering with AI-Solutions was the best decision we made. Their custom AI tools helped us achieve goals we thought impossible.",
+        "Asaninvestor, Stockk has completely changed the way I approach trading. The AI-powered insights and real-time market analysis have given me a huge advantage in making informed decisions. The automated trading feature has helped me execute trades at the right moments, even when I’m not able to monitor the market. ",
+    },
+    {
+      imgsrc: client4,
+      title: "James Lee",
+      position: "Regional Manager at Samsung Electronics",
+      description:
+        "LaundriQ is a groundbreaking innovation that perfectly complements Samsung’s commitment to smart home solutions. As a regional manager, I’ve seen firsthand how this AI-powered tool enhances the laundry experience for our customers. By intelligently detecting fabric quality and optimizing detergent usage, LaundriQ not only ensures superior cleaning results but also supports eco-friendly practices. ",
     },
   ];
   return (
@@ -161,9 +169,10 @@ const Analytics = () => {
       <div className="flex justify-center mb-7 text-2xl font-bold">
         What Our Clients Say
       </div>
-      <div className="flex gap-4 justify-center">
+      <div className="flex flex-wrap gap-4 justify-center">
         {clientResponse.map((item, i) => (
           <ServicesCard
+            Containercss={"w-[500px] mt-10"}
             key={i}
             imgsrc={item.imgsrc}
             title={item.title}

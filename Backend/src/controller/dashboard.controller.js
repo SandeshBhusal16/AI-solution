@@ -1,5 +1,6 @@
 const ContactModel = require("../model/contactUs");
 const EventModel = require("../model/event.model");
+const Gallery2Model = require("../model/gallery2model");
 const GalleryModel = require("../model/gallerymodel");
 const contactCtrl = require("./contact.controller");
 
@@ -9,12 +10,14 @@ class DashboardController {
       const contactusData = await ContactModel.find();
       const allPortfolio = await GalleryModel.find();
       const allEvents = await EventModel.find();
+      const allImage = await Gallery2Model.find();
 
       res.json({
         data: {
           contactusData,
           allPortfolio,
           allEvents,
+          allImage,
         },
         msg: "all data fetched",
       });
