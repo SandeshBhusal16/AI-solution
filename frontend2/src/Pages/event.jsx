@@ -101,7 +101,7 @@ const Event = () => {
         </div>
         <div className="bg-blue-50 min-h-[50vh]">
           {active === "today" && (
-            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5 grid grid-cols-3 justify-center">
+            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5 flex flex-wrap justify-start">
               {allevent
                 ?.filter(
                   (events) =>
@@ -120,6 +120,8 @@ const Event = () => {
                       "MMMM Do YYYY"
                     )}
                     endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
+                    startTime={allevent.starttime}
+                    endTime={allevent.endtime}
                     location={allevent.location}
                   />
                   // </motion.div>
@@ -132,7 +134,7 @@ const Event = () => {
               ).length === 0 && (
                 <>
                   <div></div>
-                  <div className="h-[50vh] w-[200px] text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
+                  <div className="h-[50vh] w-full text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
                     No events for today.
                   </div>
                 </>
@@ -141,7 +143,7 @@ const Event = () => {
           )}
 
           {active === "past" && (
-            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
+            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  flex flex-wrap justify-start">
               {allevent
                 ?.filter(
                   (events) =>
@@ -164,6 +166,8 @@ const Event = () => {
                       "MMMM Do YYYY"
                     )}
                     endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
+                    startTime={allevent.starttime}
+                    endTime={allevent.endtime}
                     location={allevent.location}
                   />
                   // </motion.div>
@@ -174,7 +178,7 @@ const Event = () => {
               ).length === 0 && (
                 <>
                   <div></div>
-                  <div className="h-[50vh] w-[200px] text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
+                  <div className="h-[50vh] w-full text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
                     No Past Events
                   </div>
                 </>
@@ -183,7 +187,7 @@ const Event = () => {
           )}
 
           {active === "all" && (
-            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
+            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  flex flex-wrap justify-start">
               {allevent?.map((allevent) => (
                 // <motion.div
                 //   className={""}
@@ -199,6 +203,8 @@ const Event = () => {
                   title={allevent?.name}
                   startDate={moment(allevent.startdate).format("MMMM Do YYYY")}
                   endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
+                  startTime={allevent.starttime}
+                  endTime={allevent.endtime}
                   location={allevent.location}
                 />
                 // </motion.div>
@@ -207,7 +213,7 @@ const Event = () => {
           )}
 
           {active === "Upcoming" && (
-            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  grid grid-cols-3 justify-center">
+            <div className="gap-10 px-[200px] bg-blue-50 py-5 my-5  flex flex-wrap justify-start">
               {allevent
                 ?.filter(
                   (events) =>
@@ -225,6 +231,8 @@ const Event = () => {
                       "MMMM Do YYYY"
                     )}
                     endDate={moment(allevent.enddate).format("MMMM Do YYYY")}
+                    startTime={allevent.starttime}
+                    endTime={allevent.endtime}
                     location={allevent.location}
                   />
                 ))}
@@ -234,7 +242,7 @@ const Event = () => {
               ).length === 0 && (
                 <>
                   <div></div>
-                  <div className="h-[50vh] w-[200px] text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
+                  <div className="h-[50vh] w-full text-lg font-bold text-[#4f46e5] flex justify-center items-center ">
                     No Upcomming Events
                   </div>
                 </>

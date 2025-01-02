@@ -73,7 +73,7 @@ const ContactUsManagement = () => {
   //   };
   return (
     <>
-      <div className="text-3xl mb-4  font-bold">Inquiry</div>
+      <div className="text-3xl mb-4  font-bold">Inquiry Management</div>
 
       <div className="border flex gap-4  max-w-[263px] rounded-[12px] p-4 mb-8 shadow-lg ">
         <div>

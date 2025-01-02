@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import portfolio from "../../../assets/portfolio.png";
+import gallery from "../../../assets/gallery.png";
 import axios from "axios";
 import * as yup from "yup";
 import { Bounce, ToastContainer, toast } from "react-toastify";
@@ -211,7 +211,7 @@ const PastPortfolioManagement = () => {
           <div className="font-bold pl-2 text-4xl">{Portfolio.length}</div>
         </div>
         <div>
-          <img src={portfolio} alt="Portfolio" />
+          <img className="w-[40px] h-[40px]" src={gallery} alt="" />
         </div>
       </div>
       <div className="bg-white rounded-lg shadow-lg drop-shadow-lg relative">
@@ -365,7 +365,7 @@ const PastPortfolioManagement = () => {
         <div className="absolute top-0 right-0 h-full bg-white shadow-2xl w-1/3 z-50 p-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-bold">
-              {isUpdateMode ? "Update Portfolio" : "Add New Portfolio"}
+              {isUpdateMode ? "Update Images" : "Add New Images"}
             </h2>
             <button
               onClick={closeDrawer}

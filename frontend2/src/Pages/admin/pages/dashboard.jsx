@@ -5,7 +5,7 @@ import contact from "../../../assets/contact.png";
 import traffic from "../../../assets/traffic.png";
 import gallery from "../../../assets/gallery.png";
 
-import { BarChart } from "@mui/x-charts";
+import { BarChart, LineChart } from "@mui/x-charts";
 import axios from "axios";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Legend, Tooltip } from "chart.js";
@@ -42,7 +42,18 @@ function Dashboard() {
       cutout: "50%",
     },
   ];
-
+  const pData = [400, 300, 200, 278, 189, 239, 349];
+  const uData = [240, 139, 580, 350, 480, 380, 430];
+  const xLabels = [
+    // "No of Users",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   const options = {
     plugins: {
       responsive: true,
@@ -142,7 +153,7 @@ function Dashboard() {
       </section>
 
       <section className=" grid grid-cols-2 gap-5">
-        <BarChart
+        {/* <BarChart
           xAxis={[
             {
               id: "barCategories",
@@ -165,7 +176,22 @@ function Dashboard() {
           ]}
           width={500}
           height={300}
-        />
+        /> */}
+        <div className="flex flex-col gap-2">
+          <div className="text-xl font-semibold text-[#22c55e]">
+            User Traffic Comparing to Past Weeks
+          </div>
+          <LineChart
+            width={600}
+            height={300}
+            series={[
+              { data: pData, label: "Past Week" },
+              { data: uData, label: "This Week" },
+            ]}
+            xAxis={[{ scaleType: "point", data: xLabels }]}
+          />
+        </div>
+
         <div className="h-[300px]">
           <Doughnut
             className="doughnut-chart"

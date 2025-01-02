@@ -15,6 +15,8 @@ const EventManagement = () => {
     name: "",
     startdate: "",
     enddate: "",
+    starttime: "",
+    endtime: "",
     location: "",
     image: "",
   });
@@ -34,6 +36,8 @@ const EventManagement = () => {
         name: "",
         startdate: "",
         enddate: "",
+        starttime: "",
+        endtime: "",
         location: "",
         image: "",
       });
@@ -49,6 +53,8 @@ const EventManagement = () => {
     name: yup.string().required("Title is required"),
     startdate: yup.string().required("Start Date is Required"),
     enddate: yup.string().required("End Date is Required"),
+    starttime: yup.string().required("Start Time is required"),
+    endtime: yup.string().required("End Time is required"),
     location: yup.string().required("Location is required"),
     image: yup.string().required("Image is Required"),
   });
@@ -75,6 +81,8 @@ const EventManagement = () => {
       name: "",
       startdate: "",
       enddate: "",
+      starttime: "",
+      endtime: "",
       location: "",
       image: "",
     });
@@ -104,6 +112,9 @@ const EventManagement = () => {
       formPayload.append("name", eventData.name);
       formPayload.append("startdate", eventData.startdate);
       formPayload.append("enddate", eventData.enddate);
+      formPayload.append("starttime", eventData.starttime);
+      formPayload.append("endtime", eventData.endtime);
+
       formPayload.append("location", eventData.location);
       formPayload.append("image", eventData.image);
 
@@ -206,6 +217,8 @@ const EventManagement = () => {
       name: item.name,
       startdate: item.startdate,
       enddate: item.enddate,
+      starttime: item.starttime,
+      endtime: item.endtime,
       location: item.location,
       image: item.image,
     });
@@ -273,6 +286,12 @@ const EventManagement = () => {
                   EndDate
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  StartTime
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  EndTime
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                   Image
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
@@ -293,6 +312,8 @@ const EventManagement = () => {
                   <td className="px-6 py-4">
                     {moment(event.enddate).format("MMMM Do YYYY")}
                   </td>
+                  <td className="px-6 py-4">{event.starttime}</td>
+                  <td className="px-6 py-4">{event.endtime}</td>
                   <td className="px-6 py-4">
                     <img
                       src={event.image}
@@ -300,7 +321,6 @@ const EventManagement = () => {
                       className="w-16 h-16 object-cover"
                     />
                   </td>
-
                   <td className="px-6 py-4">{event.location}</td>
                   <td className="px-6 py-4">
                     <div className="flex space-x-3">
@@ -419,45 +439,90 @@ const EventManagement = () => {
                 </div>
               )}
             </div>
-            <div className="flex flex-col font-[500] gap-2">
-              <label>
-                {" "}
-                Start Date <span className="text-[red]">*</span>
-              </label>
-              <input
-                className="border p-2 rounded-lg font-[400]"
-                type="date"
-                value={eventData.startdate}
-                onChange={(e) => {
-                  setEventData({ ...eventData, startdate: e.target.value });
-                  validateField("startdate", e.target.value);
-                }}
-              />
-              {errors.startdate && (
-                <div className="text-red-500 text-xs font-[400] ">
-                  {errors.startdate}
-                </div>
-              )}
+            <div className="flex w-full gap-2">
+              <div className="flex flex-col font-[500] w-full gap-2">
+                <label>
+                  {" "}
+                  Start Date <span className="text-[red]">*</span>
+                </label>
+                <input
+                  className="border p-2 rounded-lg font-[400]"
+                  type="date"
+                  value={eventData.startdate}
+                  onChange={(e) => {
+                    setEventData({ ...eventData, startdate: e.target.value });
+                    validateField("startdate", e.target.value);
+                  }}
+                />
+                {errors.startdate && (
+                  <div className="text-red-500 text-xs font-[400] ">
+                    {errors.startdate}
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-col font-[500] w-full gap-2">
+                <label>
+                  {" "}
+                  End Date <span className="text-[red]">*</span>
+                </label>
+                <input
+                  className="border p-2 rounded-lg font-[400]"
+                  type="date"
+                  value={eventData.enddate}
+                  onChange={(e) => {
+                    setEventData({ ...eventData, enddate: e.target.value });
+                    validateField("enddate", e.target.value);
+                  }}
+                />
+                {errors.enddate && (
+                  <div className="text-red-500 text-xs font-[400] ">
+                    {errors.enddate}
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="flex flex-col font-[500] gap-2">
-              <label>
-                {" "}
-                End Date <span className="text-[red]">*</span>
-              </label>
-              <input
-                className="border p-2 rounded-lg font-[400]"
-                type="date"
-                value={eventData.enddate}
-                onChange={(e) => {
-                  setEventData({ ...eventData, enddate: e.target.value });
-                  validateField("enddate", e.target.value);
-                }}
-              />
-              {errors.enddate && (
-                <div className="text-red-500 text-xs font-[400] ">
-                  {errors.enddate}
-                </div>
-              )}
+
+            <div className="flex w-full gap-2">
+              <div className="flex flex-col font-[500] w-full gap-2">
+                <label>
+                  {" "}
+                  Start Time <span className="text-[red]">*</span>
+                </label>
+                <input
+                  className="border p-2 rounded-lg font-[400]"
+                  type="time"
+                  value={eventData.starttime}
+                  onChange={(e) => {
+                    setEventData({ ...eventData, starttime: e.target.value });
+                    validateField("starttime", e.target.value);
+                  }}
+                />
+                {errors.starttime && (
+                  <div className="text-red-500 text-xs font-[400] ">
+                    {errors.starttime}
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-col font-[500] w-full gap-2">
+                <label>
+                  {" "}
+                  End Time <span className="text-[red]">*</span>
+                </label>
+                <input
+                  className="border p-2 rounded-lg font-[400]"
+                  type="time"
+                  value={eventData.endtime}
+                  onChange={(e) => {
+                    setEventData({ ...eventData, endtime: e.target.value });
+                    validateField("endtime", e.target.value);
+                  }}
+                />
+                {errors.endtime && (
+                  <div className="text-red-500 text-xs font-[400] ">
+                    {errors.endtime}
+                  </div>
+                )}
+              </div>
             </div>
             <div className="flex flex-col font-[500] gap-1">
               <label>

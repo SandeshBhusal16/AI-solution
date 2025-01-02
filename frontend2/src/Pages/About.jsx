@@ -1,7 +1,39 @@
 import React from "react";
 import { motion } from "framer-motion";
+import fe from "../assets/frontend.png";
+import pm from "../assets/Pm.png";
+import qa from "../assets/qa.png";
+import ux from "../assets/ux.png";
+import be from "../assets/backend.jpg";
 
 const About = () => {
+  const team = [
+    {
+      name: "Ethan Carter",
+      image: pm,
+      position: "Project Manager",
+    },
+    {
+      name: "Liam Johnson",
+      image: fe,
+      position: "Frontend Developer",
+    },
+    {
+      name: "Noah Smith",
+      image: be,
+      position: "Backend Developer",
+    },
+    {
+      name: "Ava Thompson",
+      image: qa,
+      position: "Quality Assurance",
+    },
+    {
+      name: "Mia Davis",
+      image: ux,
+      position: "UI/UX Designer",
+    },
+  ];
   return (
     <div>
       <div className=" min-h-screen flex flex-col justify-center items-center px-4 py-10">
@@ -89,6 +121,24 @@ const About = () => {
             excel. journey.
           </p>
         </motion.div>
+        <div className="text-[#4f46e5] text-2xl my-5 font-semibold">
+          Our Teams
+        </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          {team.map((team, index) => (
+            <div key={index} className="flex flex-col items-center basis-1/4 ">
+              <img
+                className="border w-52 h-60 object-cover rounded-lg"
+                src={team.image}
+                alt=""
+              />
+              <div className="text-center mt-2">
+                <div className="font-semibold">{team.name}</div>
+                <div className="text-sm text-gray-600">{team.position}</div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

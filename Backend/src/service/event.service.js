@@ -9,6 +9,8 @@ class EventService {
         name: Joi.string().required(),
         startdate: Joi.date().required(),
         enddate: Joi.date().required(),
+        starttime: Joi.string().required(),
+        endtime: Joi.string().required(),
         description: Joi.string().allow(null, "").optional(),
         location: Joi.string().required(),
         image: Joi.string(),

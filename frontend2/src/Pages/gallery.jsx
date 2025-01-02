@@ -34,7 +34,7 @@ const Gallery = () => {
               <div className="h-1 bg-[#4f46e5] w-[50px]"></div>
             </div>
             <p className="text-lg text-gray-400 max-w-[700px] ">
-              Events Managed By AI Solution
+              Gallery Managed By AI Solution
             </p>
           </div>
         </motion.div>

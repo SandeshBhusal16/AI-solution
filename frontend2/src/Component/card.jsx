@@ -1,6 +1,6 @@
 import logo from "../assets/bmw.png";
 import { IoIosTimer } from "react-icons/io";
-import { CiLocationOn } from "react-icons/ci";
+import { CiCalendarDate, CiLocationOn } from "react-icons/ci";
 const Card = ({
   classname,
   imageCss,
@@ -13,6 +13,8 @@ const Card = ({
   startDate,
   endDate,
   location,
+  endTime,
+  startTime,
 }) => {
   return (
     <>
@@ -76,9 +78,15 @@ const Card = ({
             <div className="font-bold text-md">{title}</div>
             <div className="flex flex-col gap-1">
               <div className="flex gap-2 items-center">
-                <IoIosTimer />
+                <CiCalendarDate />
                 <span className="text-sm">
                   {startDate} - {endDate}
+                </span>
+              </div>
+              <div className="flex gap-2 items-center">
+                <IoIosTimer />
+                <span className="text-sm">
+                  {startTime} - {endTime}
                 </span>
               </div>
               <div className="flex gap-2 items-center">
