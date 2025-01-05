@@ -169,10 +169,10 @@ const Analytics = () => {
       <div className="flex justify-center mb-7 text-2xl font-bold">
         What Our Clients Say
       </div>
-      <div className="flex flex-wrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-4  justify-center">
         {clientResponse.map((item, i) => (
           <ServicesCard
-            Containercss={"w-[500px] mt-10"}
+            Containercss={"w-[450px] mt-10"}
             key={i}
             imgsrc={item.imgsrc}
             title={item.title}

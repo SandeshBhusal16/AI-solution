@@ -43,7 +43,7 @@ function Dashboard() {
     },
   ];
   const pData = [400, 300, 200, 278, 189, 239, 349];
-  const uData = [240, 139, 580, 350, 480, 380, 430];
+  const uData = [240, 139, 580, 350, 480, 300, 0];
   const xLabels = [
     // "No of Users",
     "Sunday",
@@ -212,6 +212,8 @@ function Dashboard() {
               imageCss={"rounded-t-lg rounded-b-none w-[340px] h-[172px]"}
               src={events.image}
               title={events?.name}
+              startTime={events.starttime}
+              endTime={events.endtime}
               startDate={moment(events.startdate).format("MMMM Do YYYY")}
               endDate={moment(events.enddate).format("MMMM Do YYYY")}
               location={events.location}
