@@ -18,6 +18,9 @@ app.use(
     extended: true,
   })
 );
+app.use("/", (req, res, next) => {
+  res.json("Hello, Sandesh!");
+});
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(routes);
 app.use((req, res, next) => {
